@@ -45,16 +45,16 @@ function evaluatePixel(samples) {
 
 METHANE='''
 //VERSION=3
-var minVal = -1.0;
-var maxVal = 5.0;
+var minVal = 1600.0;
+var maxVal = 2000.0;
 
 function setup() {
   return {
-    input: ["AER_AI_340_380", "dataMask"],
+    input: ["CH4", "dataMask"],
     output: [
       {
         id: "default",
-      	bands: 4,
+          bands: 4,
       },
       {
         id: "index",
@@ -76,12 +76,12 @@ function setup() {
 var viz = ColorRampVisualizer.createBlueRed(minVal, maxVal);
 
 function evaluatePixel(samples) {
-  const [r, g, b] = viz.process(samples.AER_AI_340_380);
+  const [r, g, b] = viz.process(samples.CH4);
   
-  const statsVal = isFinite(samples.AER_AI_340_380) ? samples.AER_AI_340_380 : NaN;
+  const statsVal = isFinite(samples.CH4) ? samples.CH4 : NaN;
   return {
     default: [r, g, b, samples.dataMask],
-    index: [samples.AER_AI_340_380],
+    index: [samples.CH4],
     eobrowserStats: [statsVal],
     dataMask: [samples.dataMask],
   };
