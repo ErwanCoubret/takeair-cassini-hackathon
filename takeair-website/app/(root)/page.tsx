@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { BsBank, BsThermometerHalf } from "react-icons/bs";
 import { FaArrowRight, FaRegNewspaper } from "react-icons/fa6";
 import { FiGlobe, FiWind } from "react-icons/fi";
@@ -15,9 +16,7 @@ export default function Home() {
         <div className="flex w-full items-center justify-between">
           <h1 className="text-xl font-bold text-darkblue">Home</h1>
 
-          <div className="flex items-center p-2 bg-gray-2 rounded">
-            <HiMiniMagnifyingGlass className="text-2xl text-gray-3" />
-          </div>
+
         </div>
 
         <div className="flex flex-col gap-2">
@@ -140,20 +139,20 @@ export default function Home() {
           </div>
 
           <div className="flex flex-col gap-3 w-full">
-              <div className="flex items-center justify-between bg-gray-2 p-2 px-4 rounded w-full">
+              <Link href="/ressources" className="flex items-center justify-between bg-gray-2 p-2 px-4 rounded w-full">
                 <FaRegNewspaper className="text-2xl text-darkblue" />
                 <p className="text-base font-bold text-darkblue">Today Infos</p>
-              </div>
+              </Link>
 
-              <div className="flex items-center justify-between bg-gray-2 p-2 px-4 rounded w-full">
+              <Link href="/map" className="flex items-center justify-between bg-gray-2 p-2 px-4 rounded w-full">
                 <FiGlobe className="text-2xl text-darkblue" />
                 <p className="text-base font-bold text-darkblue">Plan an outing</p>
-              </div>
+              </Link>
 
-            <div className="flex items-center justify-between bg-gray-2 p-2 px-4 rounded w-full mb-30">
+            <Link href="/ressources" className="flex items-center justify-between bg-gray-2 p-2 px-4 rounded w-full mb-30">
               <BsBank className="text-2xl text-darkblue" />
               <p className="text-base font-bold text-darkblue">Gouvernement Recommandation</p>
-            </div>
+            </Link>
           </div>
 
         </div>

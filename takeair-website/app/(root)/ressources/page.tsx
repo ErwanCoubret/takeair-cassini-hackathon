@@ -15,7 +15,7 @@ export default function Ressources() {
         <div className="flex flex-col gap-3 w-full justify-between items-center rounded">
           <div className="flex flex-col w-full">
             <div className="flex items-center justify-between gap-2 bg-gray-2 p-2 px-4 rounded-t">
-              <p className="">
+              <p className="text-darkblue">
                 Air Quality: Sources of Pollution and Health Effects
                 <i className="ml-2 text-gray-3 text-sm font-normal">25/02/02</i>
               </p>
@@ -36,7 +36,7 @@ export default function Ressources() {
 
           <div className="flex flex-col w-full">
             <div className="flex items-center justify-between gap-2 bg-gray-2 p-2 px-4 rounded-t">
-              <p className="">
+              <p className="text-darkblue">
                 UV Radiation: Sources, Exposure, and Health Risks
                 <i className="ml-2 text-gray-3 text-sm font-normal">08/04/2025</i>
               </p>
@@ -57,7 +57,7 @@ export default function Ressources() {
 
           <div className="flex flex-col w-full">
             <div className="flex items-center justify-between gap-2 bg-gray-2 p-2 px-4 rounded-t">
-              <p className="">
+              <p className="text-darkblue">
                 Air Quality: Sources of Pollution and Health Effects
                 <i className="ml-2 text-gray-3 text-sm font-normal">15/03/2025</i>
               </p>
@@ -78,7 +78,7 @@ export default function Ressources() {
 
           <div className="flex flex-col w-full">
             <div className="flex items-center justify-between gap-2 bg-gray-2 p-2 px-4 rounded-t">
-              <p className="">
+              <p className="text-darkblue">
                 Temperature Ranges: Environmental Extremes and Human Health
                 <i className="ml-2 text-gray-3 text-sm font-normal">16/08/2024</i>
               </p>

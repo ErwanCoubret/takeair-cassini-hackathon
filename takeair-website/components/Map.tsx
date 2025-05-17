@@ -20,7 +20,7 @@ const baseUrl = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
 
 const overlays: Record<"map1" | "map2" | "map3" | "map4", string | null> = {
   map1: "/heatmaps/clouds.png",
-  map2: "/map2.png",
+  map2: "/heatmaps/pollen.png",
   map3: "/map3.png",
   map4: "/map4.png",
 };
@@ -88,9 +88,8 @@ export default function Map() {
         <MapContainer
           center={[48.523071, 7.736971]}
           zoom={10}
-          className={`h-full w-full ${
-            isFilterWindowOpen ? "pointer-events-none" : ""
-          }`}
+          className={`h-full w-full ${isFilterWindowOpen ? "pointer-events-none" : ""
+            }`}
           attributionControl={false}
         >
           <TileLayer url={baseUrl} />
@@ -117,21 +116,27 @@ export default function Map() {
 
       <form
         onSubmit={handleSearch}
-        className="absolute flex items-center gap-2 z-50 top-5 right-5"
+        className="absolute flex flex-col items-center gap-2 z-50 top-5 right-5"
       >
-        <input
-          type="text"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          placeholder="Search"
-          className="p-2 rounded-md w-40 shadow-md bg-gray-1 focus:border-darkblue focus:outline-none"
-        />
-        <button
-          type="submit"
-          className="bg-darkblue text-gray-1 p-2 px-5 rounded-md shadow-md"
-        >
-          Go
-        </button>
+        <div className="flex items-center gap-2">
+          <input
+            type="text"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Search"
+            className="p-2 rounded-md w-40 shadow-md bg-gray-1 focus:border-darkblue focus:outline-none"
+          />
+          <button
+            type="submit"
+            className="bg-darkblue text-gray-1 p-2 px-5 rounded-md shadow-md"
+          >
+            Go
+          </button>
+        </div>
+        
+        <p className="text-sm bg-gray-1 px-1 rounded text-gray-3">
+          Data gathered from Copernicus
+        </p>
       </form>
 
       <div className="absolute bottom-20 right-5 z-50">
@@ -143,13 +148,20 @@ export default function Map() {
         </button>
       </div>
 
+
       <div
-        className={`absolute flex flex-col gap-8 bottom-0 left-0 w-full h-90 bg-gray-1 rounded-t-3xl shadow-md z-50 p-6 transform transition-transform duration-300 ${
-          isFilterWindowOpen ? "translate-y-0" : "translate-y-full"
-        }`}
+        className={`absolute flex flex-col gap-8 bottom-0 left-0 w-full h-90 bg-gray-1 rounded-t-3xl shadow-md z-50 p-6 transform transition-transform duration-300 ${isFilterWindowOpen ? "translate-y-0" : "translate-y-full"
+          }`}
+      >
+
+      </div>
+
+      <div
+        className={`absolute flex flex-col gap-8 bottom-0 left-0 w-full h-90 bg-gray-1 rounded-t-3xl shadow-md z-50 p-6 transform transition-transform duration-300 ${isFilterWindowOpen ? "translate-y-0" : "translate-y-full"
+          }`}
       >
         <div className="flex justify-between items-center h-10">
-          <h2 className="text-2xl font-semibold">Filter</h2>
+          <h2 className="text-2xl text-darkblue font-semibold">Filter</h2>
           <button
             className="p-2 rounded bg-gray-2"
             onClick={() => setIsFilterWindowOpen(false)}
@@ -162,11 +174,10 @@ export default function Map() {
           <div className="flex items-center justify-between gap-2">
             <button
               onClick={() => setMapFilter("map1")}
-              className={`flex items-center justify-between p-2 px-4 rounded w-full ${
-                mapFilter === "map1"
+              className={`flex items-center justify-between p-2 px-4 rounded w-full ${mapFilter === "map1"
                   ? "bg-darkblue text-gray-1"
                   : "bg-gray-2 text-darkblue"
-              }`}
+                }`}
             >
               <FaSliders className="text-2xl" />
               <p className="text-base font-bold">For you</p>
@@ -174,11 +185,10 @@ export default function Map() {
 
             <button
               onClick={() => setMapFilter("map2")}
-              className={`flex items-center justify-between p-2 px-4 rounded w-full ${
-                mapFilter === "map2"
+              className={`flex items-center justify-between p-2 px-4 rounded w-full ${mapFilter === "map2"
                   ? "bg-darkblue text-gray-1"
                   : "bg-gray-2 text-darkblue"
-              }`}
+                }`}
             >
               <BsThermometerHalf className="text-2xl" />
               <p className="text-base font-bold">Temperature</p>
@@ -188,11 +198,10 @@ export default function Map() {
           <div className="flex items-center justify-between gap-2">
             <button
               onClick={() => setMapFilter("map3")}
-              className={`flex items-center justify-between p-2 px-4 rounded w-full ${
-                mapFilter === "map3"
+              className={`flex items-center justify-between p-2 px-4 rounded w-full ${mapFilter === "map3"
                   ? "bg-darkblue text-gray-1"
                   : "bg-gray-2 text-darkblue"
-              }`}
+                }`}
             >
               <FiWind className="text-2xl" />
               <p className="text-base font-bold">Air Quality</p>
@@ -200,11 +209,10 @@ export default function Map() {
 
             <button
               onClick={() => setMapFilter("map4")}
-              className={`flex items-center justify-between p-2 px-4 rounded w-full ${
-                mapFilter === "map4"
+              className={`flex items-center justify-between p-2 px-4 rounded w-full ${mapFilter === "map4"
                   ? "bg-darkblue text-gray-1"
                   : "bg-gray-2 text-darkblue"
-              }`}
+                }`}
             >
               <MdOutlineWbSunny className="text-2xl" />
               <p className="text-base font-bold">UV</p>

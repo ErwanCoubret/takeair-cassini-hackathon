@@ -9,9 +9,14 @@ export default function User() {
           <h1 className="text-xl font-bold text-darkblue">User Configuration</h1>
         </div>
 
-        <div className="flex w-full justify-between items-baseline">
-          <h2 className="text-lg font-bold text-darkblue">Your Sensitivities
-          </h2>
+        <div className="flex flex-col gap-2">
+          <div className="flex w-full justify-between items-baseline">
+            <h2 className="text-lg font-bold text-darkblue">Your Sensitivities
+            </h2>
+          </div>
+          <p className="text-base text-gray-3 text-darkblue">
+            Indicate your sensitivities to the following elements in order to get personnal recommandations.
+          </p>
         </div>
 
         <div className="flex flex-col gap-2">

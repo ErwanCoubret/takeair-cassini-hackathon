@@ -18,7 +18,7 @@ export default function Map() {
           <input
             type="text"
             placeholder="Search"
-            className="p-2 rounded-md shadow-md bg-gray-1 focus:border-darkblue focus:outline-none"
+            className="p-2 rounded-md text-gray-3 shadow-md bg-gray-1 focus:border-darkblue focus:outline-none"
           />
         </div>
 
