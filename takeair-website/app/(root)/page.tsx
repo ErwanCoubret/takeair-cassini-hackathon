@@ -10,7 +10,7 @@ import { MdOutlineWbSunny } from "react-icons/md";
 export default function Home() {
 
   return (
-    <div className="relative h-screen bg-gray-1 p-6">
+    <div className="relative h-screen bg-gray-1 p-6 overflow-y-auto">
       <div className="flex flex-col h-full gap-5">
         <div className="flex w-full items-center justify-between">
           <h1 className="text-xl font-bold text-darkblue">Home</h1>
@@ -140,7 +140,6 @@ export default function Home() {
           </div>
 
           <div className="flex flex-col gap-3 w-full">
-            <div className="flex items-center justify-between gap-2">
               <div className="flex items-center justify-between bg-gray-2 p-2 px-4 rounded w-full">
                 <FaRegNewspaper className="text-2xl text-darkblue" />
                 <p className="text-base font-bold text-darkblue">Today Infos</p>
@@ -150,9 +149,8 @@ export default function Home() {
                 <FiGlobe className="text-2xl text-darkblue" />
                 <p className="text-base font-bold text-darkblue">Plan an outing</p>
               </div>
-            </div>
 
-            <div className="flex items-center justify-between bg-gray-2 p-2 px-4 rounded w-full">
+            <div className="flex items-center justify-between bg-gray-2 p-2 px-4 rounded w-full mb-30">
               <BsBank className="text-2xl text-darkblue" />
               <p className="text-base font-bold text-darkblue">Gouvernement Recommandation</p>
             </div>

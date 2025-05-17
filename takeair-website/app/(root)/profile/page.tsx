@@ -3,7 +3,7 @@
 export default function User() {
 
   return (
-    <div className="relative h-screen bg-gray-1 p-6">
+    <div className="relative h-screen bg-gray-1 p-6 overflow-y-auto">
       <div className="flex flex-col h-full gap-5">
         <div className="flex w-full items-center justify-between">
           <h1 className="text-xl font-bold text-darkblue">User Configuration</h1>
@@ -63,7 +63,7 @@ export default function User() {
             </h2>
           </div>
 
-          <div className="flex w-full justify-between bg-gray-2 px-5 py-3 items-center rounded">
+          <div className="flex w-full justify-between bg-gray-2 px-5 py-3 items-center rounded mb-20">
             <div className="flex flex-col gap-1 w-full">
               <input type="range" min="0" max="100" defaultValue="20" className="accent-darkblue" />
             </div>

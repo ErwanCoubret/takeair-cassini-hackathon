@@ -6,7 +6,7 @@ import { FaArrowRight } from "react-icons/fa6";
 export default function Ressources() {
 
   return (
-    <div className="relative h-screen bg-gray-1 p-6">
+    <div className="relative h-screen bg-gray-1 p-6 overflow-y-auto">
       <div className="flex flex-col h-full gap-5">
         <div className="flex w-full items-center justify-between">
           <h1 className="text-xl font-bold text-darkblue">Ressources</h1>
@@ -97,7 +97,7 @@ export default function Ressources() {
             </div>
           </div>
 
-          <button className="text-sm w-fit flex items-center gap-2 bg-gray-2 text-darkblue p-2 rounded">
+          <button className="text-sm w-fit flex items-center gap-2 bg-gray-2 text-darkblue p-2 rounded mb-20">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
