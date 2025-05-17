@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "leaflet/dist/leaflet.css";
 
 :root {
   --background: #ffffff;
@@ -36,3 +37,4 @@ body {
 body {
   /* Removed styles for p, navbar, etc. */
 }
+

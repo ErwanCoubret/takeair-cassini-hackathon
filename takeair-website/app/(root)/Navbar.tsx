@@ -8,7 +8,7 @@ export default function Navbar() {
   const pathname = usePathname();
 
   return (
-    <nav className="absolute bottom-0 z-50 bg-gray-2 h-15 text-white w-full">
+    <nav className="absolute bottom-0 z-4000 bg-gray-2 h-15 text-white w-full">
       <div className="flex items-center w-full h-full">
         <Link href="./" className={`flex justify-center items-center w-full h-full ${pathname === "/" ? "bg-darkblue text-gray-2 rounded-tr" : "text-darkblue"}`}>
           {pathname === "/" ? <IoHome className="text-2xl" /> : <IoHomeOutline className="text-2xl" />}
