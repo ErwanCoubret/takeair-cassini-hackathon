@@ -1,54 +1,85 @@
 "use client";
 
-import { useState } from "react";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import { useState, useEffect } from "react";
+import {
+  MapContainer,
+  TileLayer,
+  Marker,
+  Popup,
+  useMap,
+  ImageOverlay,
+} from "react-leaflet";
 import { BsThermometerHalf } from "react-icons/bs";
 import { FaSliders } from "react-icons/fa6";
 import { FiWind } from "react-icons/fi";
 import { IoCloseSharp } from "react-icons/io5";
 import { MdOutlineWbSunny } from "react-icons/md";
 import "leaflet/dist/leaflet.css";
-import type { Map as LeafletMap } from 'leaflet';
 
 const baseUrl = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
 
-const overlays: Record<
-  "map1" | "map2" | "map3" | "map4",
-  string | null
-> = {
-  map1: null,
-  map2: "https://tile.openweathermap.org/map/temp_new/{z}/{x}/{y}.png?appid=YOUR_API_KEY",
-  map3: "https://tiles.waqi.info/tiles/{z}/{x}/{y}.png?token=YOUR_TOKEN",
-  map4: "https://tile.openweathermap.org/map/uvi/{z}/{x}/{y}.png?appid=YOUR_API_KEY",
+const overlays: Record<"map1" | "map2" | "map3" | "map4", string | null> = {
+  map1: "/heatmaps/clouds.png",
+  map2: "/map2.png",
+  map3: "/map3.png",
+  map4: "/map4.png",
 };
 
+const imageBounds: [[number, number], [number, number]] = [
+  [47.9246029, 6.8386557],
+  [49.1145504, 8.6352863],
+];
+
+function SearchLayer({
+  query,
+  onResult,
+}: {
+  query: string;
+  onResult: (pos: [number, number]) => void;
+}) {
+  const map = useMap();
+
+  useEffect(() => {
+    if (!query) return;
+    (async () => {
+      try {
+        const res = await fetch(
+          `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(
+            query
+          )}`
+        );
+        const data = await res.json();
+        if (data.length) {
+          const { lat, lon } = data[0];
+          const coords: [number, number] = [parseFloat(lat), parseFloat(lon)];
+          map.setView(coords, 14);
+          onResult(coords);
+        } else {
+          alert("Location not found");
+        }
+      } catch (err) {
+        console.error(err);
+        alert("Search error");
+      }
+    })();
+  }, [query]);
+
+  return null;
+}
+
 export default function Map() {
-  const [map, setMap] = useState<"map1" | "map2" | "map3" | "map4">("map1");
+  const [mapFilter, setMapFilter] = useState<
+    "map1" | "map2" | "map3" | "map4"
+  >("map1");
   const [isFilterWindowOpen, setIsFilterWindowOpen] = useState(false);
   const [query, setQuery] = useState("");
-  const [leafletMap, setLeafletMap] = useState<LeafletMap | null>(null);
+  const [searchQuery, setSearchQuery] = useState<string | null>(null);
   const [searchPos, setSearchPos] = useState<[number, number] | null>(null);
 
-  const handleSearch = async (e: React.FormEvent) => {
+  const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!query || !leafletMap) return;
-    try {
-      const res = await fetch(
-        `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}`
-      );
-      const data = await res.json();
-      if (data && data.length > 0) {
-        const { lat, lon } = data[0];
-        const coords: [number, number] = [parseFloat(lat), parseFloat(lon)];
-        leafletMap.setView(coords, 14);
-        setSearchPos(coords);
-      } else {
-        alert("Location not found");
-      }
-    } catch (err) {
-      console.error(err);
-      alert("Search error");
-    }
+    if (!query) return;
+    setSearchQuery(query);
   };
 
   return (
@@ -56,18 +87,29 @@ export default function Map() {
       <div className="absolute inset-0 z-0">
         <MapContainer
           center={[48.523071, 7.736971]}
-          zoom={14}
-          whenReady={() => {
-            if (leafletMap) return;
-          }}
-          className={`h-full w-full ${isFilterWindowOpen ? "pointer-events-none" : ""}`}
+          zoom={10}
+          className={`h-full w-full ${
+            isFilterWindowOpen ? "pointer-events-none" : ""
+          }`}
           attributionControl={false}
         >
           <TileLayer url={baseUrl} />
-          {overlays[map] && <TileLayer url={overlays[map] as string} opacity={0.6} />}
+
+          {overlays[mapFilter] && (
+            <ImageOverlay
+              url={overlays[mapFilter]!}
+              bounds={imageBounds}
+              opacity={0.4}
+            />
+          )}
+
+          {searchQuery && (
+            <SearchLayer query={searchQuery} onResult={setSearchPos} />
+          )}
+
           {searchPos && (
             <Marker position={searchPos}>
-              <Popup>{query}</Popup>
+              <Popup>{searchQuery}</Popup>
             </Marker>
           )}
         </MapContainer>
@@ -82,11 +124,11 @@ export default function Map() {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Search"
-          className="p-2 rounded-md shadow-md bg-gray-1 focus:border-darkblue focus:outline-none"
+          className="p-2 rounded-md w-40 shadow-md bg-gray-1 focus:border-darkblue focus:outline-none"
         />
         <button
           type="submit"
-          className="bg-darkblue text-gray-1 p-2 rounded-md shadow-md"
+          className="bg-darkblue text-gray-1 p-2 px-5 rounded-md shadow-md"
         >
           Go
         </button>
@@ -102,7 +144,7 @@ export default function Map() {
       </div>
 
       <div
-        className={`absolute flex flex-col gap-8 bottom-0 left-0 w-full h-1/2 bg-gray-1 rounded-t-3xl shadow-md z-50 p-6 transform transition-transform duration-300 ${
+        className={`absolute flex flex-col gap-8 bottom-0 left-0 w-full h-90 bg-gray-1 rounded-t-3xl shadow-md z-50 p-6 transform transition-transform duration-300 ${
           isFilterWindowOpen ? "translate-y-0" : "translate-y-full"
         }`}
       >
@@ -119,9 +161,11 @@ export default function Map() {
         <div className="flex flex-col gap-3 w-full">
           <div className="flex items-center justify-between gap-2">
             <button
-              onClick={() => setMap("map1")}
+              onClick={() => setMapFilter("map1")}
               className={`flex items-center justify-between p-2 px-4 rounded w-full ${
-                map === "map1" ? "bg-darkblue text-gray-1" : "bg-gray-2 text-darkblue"
+                mapFilter === "map1"
+                  ? "bg-darkblue text-gray-1"
+                  : "bg-gray-2 text-darkblue"
               }`}
             >
               <FaSliders className="text-2xl" />
@@ -129,9 +173,11 @@ export default function Map() {
             </button>
 
             <button
-              onClick={() => setMap("map2")}
+              onClick={() => setMapFilter("map2")}
               className={`flex items-center justify-between p-2 px-4 rounded w-full ${
-                map === "map2" ? "bg-darkblue text-gray-1" : "bg-gray-2 text-darkblue"
+                mapFilter === "map2"
+                  ? "bg-darkblue text-gray-1"
+                  : "bg-gray-2 text-darkblue"
               }`}
             >
               <BsThermometerHalf className="text-2xl" />
@@ -141,9 +187,11 @@ export default function Map() {
 
           <div className="flex items-center justify-between gap-2">
             <button
-              onClick={() => setMap("map3")}
+              onClick={() => setMapFilter("map3")}
               className={`flex items-center justify-between p-2 px-4 rounded w-full ${
-                map === "map3" ? "bg-darkblue text-gray-1" : "bg-gray-2 text-darkblue"
+                mapFilter === "map3"
+                  ? "bg-darkblue text-gray-1"
+                  : "bg-gray-2 text-darkblue"
               }`}
             >
               <FiWind className="text-2xl" />
@@ -151,9 +199,11 @@ export default function Map() {
             </button>
 
             <button
-              onClick={() => setMap("map4")}
+              onClick={() => setMapFilter("map4")}
               className={`flex items-center justify-between p-2 px-4 rounded w-full ${
-                map === "map4" ? "bg-darkblue text-gray-1" : "bg-gray-2 text-darkblue"
+                mapFilter === "map4"
+                  ? "bg-darkblue text-gray-1"
+                  : "bg-gray-2 text-darkblue"
               }`}
             >
               <MdOutlineWbSunny className="text-2xl" />
