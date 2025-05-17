@@ -40,7 +40,7 @@ export default function Map() {
         </div>
 
         <div
-          className={`absolute flex flex-col gap-8 bottom-0 left-0 w-full h-2/5 bg-gray-1 rounded-t-3xl shadow-md z-30 p-6 transform transition-transform duration-300 ${isFilterWindowOpen ? "translate-y-0" : "translate-y-full"}`}
+          className={`absolute flex flex-col gap-8 bottom-0 left-0 w-full h-1/2 bg-gray-1 rounded-t-3xl shadow-md z-30 p-6 transform transition-transform duration-300 ${isFilterWindowOpen ? "translate-y-0" : "translate-y-full"}`}
         >
           <div className="flex justify-between items-center h-10">
             <h2 className="text-2xl font-semibold">Filter</h2>
@@ -98,7 +98,7 @@ export default function Map() {
             </div>
           </div>
 
-            <button className="mx-auto w-fit flex items-center gap-2 bg-gray-2 text-darkblue p-2 rounded">
+            <button className="mx-auto w-fit flex items-center gap-2 bg-gray-2 text-darkblue p-2 rounded mb-20">
               
               <svg
               xmlns="http://www.w3.org/2000/svg"
