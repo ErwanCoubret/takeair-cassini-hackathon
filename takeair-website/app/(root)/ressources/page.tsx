@@ -1,14 +1,27 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaArrowRight } from "react-icons/fa6";
 
 export default function Ressources() {
   const [isMore, setIsMore] = useState(false);
 
+  // Hack pour homogénéiser 100vh sur mobile/desktop
+  useEffect(() => {
+    const setVh = () => {
+      document.documentElement.style.setProperty(
+        "--vh",
+        `${window.innerHeight * 0.01}px`
+      );
+    };
+    setVh();
+    window.addEventListener("resize", setVh);
+    return () => window.removeEventListener("resize", setVh);
+  }, []);
+
   return (
-    <div className="relative h-screen bg-gray-1 p-6 overflow-y-auto">
+    <div className="relative h-[calc(var(--vh)*100)] bg-gray-1 p-6 overflow-y-auto">
       <div className="flex flex-col h-full gap-5">
         <div className="flex w-full items-center justify-between">
           <h1 className="text-xl font-bold text-darkblue">Ressources</h1>
