@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { FaArrowRight } from "react-icons/fa6";
 
-export default function Ressources() {
+export default function Resources() {
   const [isMore, setIsMore] = useState(false);
 
   // Hack pour homogénéiser 100vh sur mobile/desktop
@@ -24,7 +24,7 @@ export default function Ressources() {
     <div className="relative h-[calc(var(--vh)*100)] bg-gray-1 p-6 overflow-y-auto">
       <div className="flex flex-col h-full gap-5">
         <div className="flex w-full items-center justify-between">
-          <h1 className="text-xl font-bold text-darkblue">Ressources</h1>
+          <h1 className="text-xl font-bold text-darkblue">Resources</h1>
         </div>
 
         <div className="flex flex-col gap-5 w-full justify-between items-center rounded">

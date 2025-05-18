@@ -40,17 +40,17 @@ export default function Navbar() {
         </Link>
 
         <Link
-          href="./ressources"
+          href="./resources"
           className={`flex flex-col justify-center items-center w-full h-full ${
-            pathname === "/ressources" ? "bg-green-2 text-gray-2 rounded-t" : "text-darkblue"
+            pathname === "/resources" ? "bg-green-2 text-gray-2 rounded-t" : "text-darkblue"
           }`}
         >
-          {pathname === "/ressources" ? (
+          {pathname === "/resources" ? (
             <IoBook className="text-2xl" />
           ) : (
             <IoBookOutline className="text-2xl" />
           )}
-          <span className={`text-xs ${pathname === "/ressources" ? "font-bold" : ""}`}>Ressources</span>
+          <span className={`text-xs ${pathname === "/resources" ? "font-bold" : ""}`}>Resources</span>
         </Link>
 
         <Link

@@ -44,16 +44,7 @@ export default function User() {
             <h2 className="text-lg font-bold text-darkblue">Our Mission</h2>
           </div>
           <p className="text-sm text-gray-3 text-darkblue">
-            We are dedicated to providing you with the <b>best quality information</b> on sattelites and air data. We aim to be supported by <b>medical professionals and researchers</b>.
-          </p>
-        </div>
-
-        <div className="flex flex-col gap-1 p-2 bg-blue-400 rounded">
-          <div className="flex w-full justify-between items-baseline">
-            <h2 className="text-lg font-bold text-white">Medical Disclaimer</h2>
-          </div>
-          <p className="text-sm text-gray-3 text-white">
-            The content provided by this app is for informational purposes only and is not intended as a substitute for professional medical advice, diagnosis, or treatment. Always consult your physician or other qualified health provider with any questions you may have regarding a medical condition.
+            We are dedicated to providing you with the <b>best quality information</b> on satellites and air data. We aim to be supported by <b>medical professionals and researchers</b>.
           </p>
         </div>
 
@@ -62,7 +53,7 @@ export default function User() {
             <h2 className="text-lg font-bold text-darkblue">The team</h2>
           </div>
           <p className="text-sm text-gray-3 text-darkblue">
-            We are a team of passionate individuals that began this project during the Cassini ackathon. We are a mix of <b>engineers, designers and product managers</b> dedicated to use space data to improve daily life of seniors.
+            We are a team of passionate individuals that began this project during the Cassini hackathon. We are a mix of <b>engineers, designers and product managers</b> dedicated to use space data to improve daily life of seniors.
           </p>
         </div>
 
@@ -79,7 +70,7 @@ export default function User() {
           <ul>
             {teamMembers.map((member) => (
               <li key={member.name} className="flex flex-col py-1">
-                <span className="font-bold text-darkblue">{member.name}</span> <span>{member.role}</span>
+                <span className="font-bold text-darkblue">{member.name}</span> <span className="text-gray-3">{member.role}</span>
               </li>
             ))}
           </ul>

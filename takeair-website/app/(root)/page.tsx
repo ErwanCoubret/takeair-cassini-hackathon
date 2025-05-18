@@ -8,16 +8,18 @@ import { BsBank, BsThermometerHalf } from "react-icons/bs";
 import { FaArrowRight, FaRegNewspaper } from "react-icons/fa6";
 import { FiGlobe, FiWind } from "react-icons/fi";
 import { IoCloseSharp, IoVolumeHigh, IoVolumeMute } from "react-icons/io5";
-import { MdOutlineWbSunny } from "react-icons/md";
+import { MdOutlineInfo, MdOutlineWbSunny } from "react-icons/md";
 
 
 export default function Home() {
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
   const [isMetricsModalOpen, setIsMetricsModalOpen] = useState(false);
+  const [isDisclaimerModalOpen, setIsDisclaimerModalOpen] = useState(false);
   const [isPollenModalOpen, setIsPollenModalOpen] = useState(false);
   const [isTempModalOpen, setIsTempModalOpen] = useState(false);
   const [isUVModalOpen, setIsUVModalOpen] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+
 
   useEffect(() => {
     audioRef.current = new Audio("/recap.mp3");
@@ -186,12 +188,69 @@ export default function Home() {
             </h2>
           </div>
 
-          <Link href="/about">
-            <button className="flex text-sm justify-between items-center gap-2 bg-gray-2 px-4 py-2 rounded text-darkblue font-semibold">
-              See Disclaimer
-              <FaArrowRight className="text-base" />
-            </button>
-          </Link>
+          <button
+            onClick={() => setIsDisclaimerModalOpen(true)}
+            className="flex w-fit text-xs justify-between items-center gap-2 bg-gray-2 px-4 py-2 rounded text-darkblue font-semibold">
+            <MdOutlineInfo className="text-base" />
+            Legal Disclaimer
+          </button>
+
+          <Modal
+            showState={isDisclaimerModalOpen}
+            setShowState={setIsDisclaimerModalOpen}
+          >
+            <div className="flex justify-between items-center">
+              <h2 className="text-lg font-bold text-darkblue">Legal Disclaimer</h2>
+
+              <button
+                className="p-2 rounded bg-gray-2"
+                onClick={() => setIsDisclaimerModalOpen(false)}
+              >
+                <IoCloseSharp className="text-darkblue text-2xl" />
+              </button>
+            </div>
+
+            <div className="space-y-4 text-xs text-gray-3 mt-4 max-h-[75vh] overflow-y-auto">
+              <p>
+                This app (“App”) provides only information for educational purposes. This App is not medical or treatment advice, professional diagnosis, opinion, or services – and may not be treated as such by the user. As such, this App may not be relied upon for the purposes of medical diagnosis or as a recommendation for medical care or treatment. The information provided by this App is not a substitute for professional medical advice, diagnosis or treatment. All content, including text, graphics, images and information, contained on or available through this App is for general information purposes only.
+              </p>
+              
+              <p>
+                <strong>This App does not represent a substitute for expert medical attention.</strong> You must not rely on the information on this App as an alternative to medical advice from your doctor or other professional healthcare provider. We strongly recommend that you consult your own physician or another available health professional regarding any diagnosis, findings, interpretation or course of treatment. If you think you or another individual may be suffering from any medical condition, you should seek immediate medical attention. You should never delay seeking medical advice, or discontinue medical treatment because of information in this guide.
+              </p>
+              
+              <p>
+                The medical information within this guide is provided “as is” without any representations or warranties, express or implied. TakeAir or any other person or party that contributed to this App makes no representations or warranties in relation to the medical information in this guide. Reliance on any information provided by this App or any linked websites is solely at your own risk.
+              </p>
+              
+              <p>
+                None of the individual authors, contributors, developers of this guide nor anyone else connected to TakeAir take any responsibility for the results or consequences of any attempt to use or adopt any of the information presented by this guide.
+              </p>
+              
+              <p>
+                Without prejudice to the generality of the foregoing paragraph, TakeAir does not warrant that the medical information in this guide is complete, true, accurate, up-to-date, or non-misleading. Neither does TakeAir assume legal liability or responsibility for the points mentioned above.
+              </p>
+              
+              <p>
+                <strong>By downloading and using the App you have acknowledged that:</strong>
+              </p>
+              <ul className="list-disc ml-5">
+                <li>
+                  <strong>YOU HAVE READ AND UNDERSTAND THIS DISCLAIMER</strong>
+                </li>
+                <li>
+                  <strong>YOU AGREE WITH THIS DISCLAIMER</strong>
+                </li>
+                <li>
+                  <strong>YOU AGREE TO BE LEGALLY BOUND BY THIS DISCLAIMER, WHICH SHALL TAKE EFFECT IMMEDIATELY WHEN DOWNLOADING OR USING ONE OF SURFING MEDICAL INTERNATIONAL’S APPS</strong>
+                </li>
+                <li>
+                  <strong>IF YOU DO NOT AGREE TO BE LEGALLY BOUND BY THIS DISCLAIMER, YOU MAY NOT DOWNLOAD AND/OR ACCESS THE APP, REGISTER THE APP UNDER YOUR NAME, OR USE THE APP.</strong>
+                </li>
+              </ul>
+            </div>
+          </Modal>
+
 
           <div className="flex flex-col gap-3 w-full justify-between bg-gray-2 p-3 items-center rounded">
             <div className="flex flex-col w-full">
@@ -310,7 +369,7 @@ export default function Home() {
           </div>
 
           <div className="flex flex-col gap-3 w-full">
-            <Link href="/ressources" className="flex items-center justify-between bg-gray-2 p-2 px-4 rounded w-full">
+            <Link href="/resources" className="flex items-center justify-between bg-gray-2 p-2 px-4 rounded w-full">
               <FaRegNewspaper className="text-2xl text-darkblue" />
               <p className="text-base font-bold text-darkblue">Today Infos</p>
             </Link>
@@ -320,7 +379,7 @@ export default function Home() {
               <p className="text-base font-bold text-darkblue">Plan an outing</p>
             </Link>
 
-            <Link href="/ressources" className="flex items-center justify-between bg-gray-2 p-2 px-4 rounded w-full mb-30">
+            <Link href="/resources" className="flex items-center justify-between bg-gray-2 p-2 px-4 rounded w-full mb-30">
               <BsBank className="text-2xl text-darkblue" />
               <p className="text-base font-bold text-darkblue">Gouvernement Recommendation</p>
             </Link>
