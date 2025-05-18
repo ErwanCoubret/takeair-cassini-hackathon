@@ -18,7 +18,9 @@
   --color-gray-2: #EDEBEB;
   --color-gray-3: #989898;
   --color-darkblue: #062130;
-  --color-green: #57CC99;
+  --color-green-1: #80ED99;
+  --color-green-2: #57CC99;
+  --color-green-3: #36AA77;
 }
 
 @media (prefers-color-scheme: dark) {

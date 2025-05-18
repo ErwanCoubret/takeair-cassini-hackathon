@@ -10,20 +10,60 @@ export default function Navbar() {
   return (
     <nav className="absolute bottom-0 z-4000 bg-gray-2 h-15 text-white w-full">
       <div className="flex items-center w-full h-full">
-        <Link href="./" className={`flex justify-center items-center w-full h-full ${pathname === "/" ? "bg-darkblue text-gray-2 rounded-tr" : "text-darkblue"}`}>
-          {pathname === "/" ? <IoHome className="text-2xl" /> : <IoHomeOutline className="text-2xl" />}
+        <Link
+          href="./"
+          className={`flex flex-col justify-center items-center w-full h-full ${
+            pathname === "/" ? "bg-green-2 text-gray-2 rounded-tr" : "text-darkblue"
+          }`}
+        >
+          {pathname === "/" ? (
+            <IoHome className="text-2xl" />
+          ) : (
+            <IoHomeOutline className="text-2xl" />
+          )}
+          <span className={`text-xs ${pathname === "/" ? "font-bold" : ""}`}>Home</span>
         </Link>
 
-        <Link href="./map" className={`flex justify-center items-center w-full h-full ${pathname === "/map" ? "bg-darkblue text-gray-2 rounded-t" : "text-darkblue"}`}>
-          {pathname === "/map" ? <IoMap className="text-2xl" /> : <IoMapOutline className="text-2xl" />}
+        <Link
+          href="./map"
+          className={`flex flex-col justify-center items-center w-full h-full ${
+            pathname === "/map" ? "bg-green-2 text-gray-2 rounded-t" : "text-darkblue"
+          }`}
+        >
+          {pathname === "/map" ? (
+            <IoMap className="text-2xl" />
+          ) : (
+            <IoMapOutline className="text-2xl" />
+          )}
+          <span className={`text-xs ${pathname === "/map" ? "font-bold" : ""}`}>Map</span>
         </Link>
 
-        <Link href="./ressources" className={`flex justify-center items-center w-full h-full ${pathname === "/ressources" ? "bg-darkblue text-gray-2 rounded-t" : "text-darkblue"}`}>
-          {pathname === "/ressources" ? <IoBook className="text-2xl" /> : <IoBookOutline className="text-2xl" />}
+        <Link
+          href="./ressources"
+          className={`flex flex-col justify-center items-center w-full h-full ${
+            pathname === "/ressources" ? "bg-green-2 text-gray-2 rounded-t" : "text-darkblue"
+          }`}
+        >
+          {pathname === "/ressources" ? (
+            <IoBook className="text-2xl" />
+          ) : (
+            <IoBookOutline className="text-2xl" />
+          )}
+          <span className={`text-xs ${pathname === "/ressources" ? "font-bold" : ""}`}>Ressources</span>
         </Link>
 
-        <Link href="./profile" className={`flex justify-center items-center w-full h-full ${pathname === "/profile" ? "bg-darkblue text-gray-2 rounded-tl" : "text-darkblue"}`}>
-          {pathname === "/profile" ? <IoPersonCircle className="text-2xl" /> : <IoPersonCircleOutline className="text-2xl" />}
+        <Link
+          href="./profile"
+          className={`flex flex-col justify-center items-center w-full h-full ${
+            pathname === "/profile" ? "bg-green-2 text-gray-2 rounded-tl" : "text-darkblue"
+          }`}
+        >
+          {pathname === "/profile" ? (
+            <IoPersonCircle className="text-2xl" />
+          ) : (
+            <IoPersonCircleOutline className="text-2xl" />
+          )}
+          <span className={`text-xs ${pathname === "/profile" ? "font-bold" : ""}`}>Profile</span>
         </Link>
       </div>
     </nav>

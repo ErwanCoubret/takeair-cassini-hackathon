@@ -12,17 +12,20 @@ import {
 import { BsThermometerHalf } from "react-icons/bs";
 import { FaSliders } from "react-icons/fa6";
 import { FiWind } from "react-icons/fi";
-import { IoCloseSharp } from "react-icons/io5";
+import { IoCloseSharp, IoWaterOutline } from "react-icons/io5";
 import { MdOutlineWbSunny } from "react-icons/md";
 import "leaflet/dist/leaflet.css";
+import { IoIosWater, IoMdCloudOutline } from "react-icons/io";
 
 const baseUrl = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
 
-const overlays: Record<"map1" | "map2" | "map3" | "map4", string | null> = {
+const overlays: Record<"map1" | "map2" | "map3" | "map4" | "map5" | "map6", string | null> = {
   map1: "/heatmaps/clouds.png",
-  map2: "/heatmaps/pollen.png",
-  map3: "/heatmaps/ndvi.png",
-  map4: "/map4.png",
+  map2: "/heatmaps/temperature.png",
+  map3: "/heatmaps/airquality.png",
+  map4: "/heatmaps/ndvi.png",
+  map5: "/heatmaps/clouds.png",
+  map6: "/heatmaps/ndvi.png",
 };
 
 const imageBounds: [[number, number], [number, number]] = [
@@ -69,7 +72,7 @@ function SearchLayer({
 
 export default function Map() {
   const [mapFilter, setMapFilter] = useState<
-    "map1" | "map2" | "map3" | "map4"
+    "map1" | "map2" | "map3" | "map4" | "map5" | "map6"
   >("map1");
   const [isFilterWindowOpen, setIsFilterWindowOpen] = useState(false);
   const [query, setQuery] = useState("");
@@ -93,6 +96,8 @@ export default function Map() {
     window.addEventListener("resize", setVh);
     return () => window.removeEventListener("resize", setVh);
   }, []);
+
+  const [isMore, setIsMore] = useState(false);
 
   return (
     <div className="relative  h-[calc(var(--vh)*100)] bg-gray-1 p-6 overflow-hidden">
@@ -145,7 +150,7 @@ export default function Map() {
             Go
           </button>
         </div>
-        
+
         <p className="text-sm bg-gray-1 px-1 rounded text-gray-3">
           Data gathered from Copernicus
         </p>
@@ -187,8 +192,8 @@ export default function Map() {
             <button
               onClick={() => setMapFilter("map1")}
               className={`flex items-center justify-between p-2 px-4 rounded w-full ${mapFilter === "map1"
-                  ? "bg-darkblue text-gray-1"
-                  : "bg-gray-2 text-darkblue"
+                ? "bg-darkblue text-gray-1"
+                : "bg-gray-2 text-darkblue"
                 }`}
             >
               <FaSliders className="text-2xl" />
@@ -198,8 +203,8 @@ export default function Map() {
             <button
               onClick={() => setMapFilter("map2")}
               className={`flex items-center justify-between p-2 px-4 rounded w-full ${mapFilter === "map2"
-                  ? "bg-darkblue text-gray-1"
-                  : "bg-gray-2 text-darkblue"
+                ? "bg-darkblue text-gray-1"
+                : "bg-gray-2 text-darkblue"
                 }`}
             >
               <BsThermometerHalf className="text-2xl" />
@@ -211,8 +216,8 @@ export default function Map() {
             <button
               onClick={() => setMapFilter("map3")}
               className={`flex items-center justify-between p-2 px-4 rounded w-full ${mapFilter === "map3"
-                  ? "bg-darkblue text-gray-1"
-                  : "bg-gray-2 text-darkblue"
+                ? "bg-darkblue text-gray-1"
+                : "bg-gray-2 text-darkblue"
                 }`}
             >
               <FiWind className="text-2xl" />
@@ -222,17 +227,47 @@ export default function Map() {
             <button
               onClick={() => setMapFilter("map4")}
               className={`flex items-center justify-between p-2 px-4 rounded w-full ${mapFilter === "map4"
-                  ? "bg-darkblue text-gray-1"
-                  : "bg-gray-2 text-darkblue"
+                ? "bg-darkblue text-gray-1"
+                : "bg-gray-2 text-darkblue"
                 }`}
             >
               <MdOutlineWbSunny className="text-2xl" />
               <p className="text-base font-bold">UV</p>
             </button>
           </div>
+
+          {isMore && (
+            <>
+              <div className="flex items-center justify-between gap-2">
+                <button
+                  onClick={() => setMapFilter("map5")}
+                  className={`flex items-center justify-between p-2 px-4 rounded w-full ${mapFilter === "map5"
+                    ? "bg-darkblue text-gray-1"
+                    : "bg-gray-2 text-darkblue"
+                    }`}
+                >
+                  <IoMdCloudOutline className="text-2xl" />
+                  <p className="text-base font-bold">Clouds</p>
+                </button>
+
+                <button
+                  onClick={() => setMapFilter("map6")}
+                  className={`flex items-center justify-between p-2 px-4 rounded w-full ${mapFilter === "map6"
+                    ? "bg-darkblue text-gray-1"
+                    : "bg-gray-2 text-darkblue"
+                    }`}
+                >
+                  <IoWaterOutline className="text-2xl" />
+                  <p className="text-base font-bold">Humidity</p>
+                </button>
+              </div>
+            </>
+          )}
         </div>
 
-        <button className="mx-auto w-fit flex items-center gap-2 bg-gray-2 text-darkblue p-2 rounded mb-20">
+        {!isMore && <button
+          onClick={() => setIsMore(true)}
+          className="mx-auto w-fit flex items-center gap-2 bg-gray-2 text-darkblue p-2 rounded mb-20">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -244,7 +279,7 @@ export default function Map() {
             <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
           </svg>
           See more
-        </button>
+        </button>}
       </div>
     </div>
   );
