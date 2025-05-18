@@ -16,10 +16,41 @@ export default function User() {
     return () => window.removeEventListener("resize", setVh);
   }, []);
 
+  const textsInfos = {
+    "Air Quality": [
+      "You're not sensitive to air quality.",
+      "You're quite sensitive to air quality.",
+      "You're very sensitive to air quality.",
+      "You're extremely sensitive to air quality.",
+    ],
+    "Temperature": [
+      "You're not sensitive to temperature.",
+      "You're quite sensitive to temperature.",
+      "You're very sensitive to temperature.",
+      "You're extremely sensitive to temperature.",
+    ],
+    "UV": [
+      "You're not sensitive to UV.",
+      "You're quite sensitive to UV.",
+      "You're very sensitive to UV.",
+      "You're extremely sensitive to UV.",
+    ],
+    "Pollen": [
+      "You're not sensitive to pollen.",
+      "You're quite sensitive to pollen.",
+      "You're very sensitive to pollen.",
+      "You're extremely sensitive to pollen.",
+    ],
+  }
 
   const [hasAsthma, setHasAsthma] = useState(false);
   const [hasCardiacFragility, setHasCardiacFragility] = useState(false);
   const [hasArthritis, setHasArthritis] = useState(false);
+
+  const [airQuality, setAirQuality] = useState(70);
+  const [temperature, setTemperature] = useState(90);
+  const [uv, setUv] = useState(30);
+  const [pollen, setPollen] = useState(0);
 
   return (
     <div className="relative h-[calc(var(--vh)*100)] bg-gray-1 p-6 overflow-y-auto">
@@ -39,57 +70,117 @@ export default function User() {
         </div>
 
         <div className="flex flex-col gap-1">
-          <div className="flex w-full justify-between items-baseline">
+          <div className="flex w-full gap-3 items-baseline">
             <h2 className="text-base font-bold text-darkblue">
               Air Quality
             </h2>
+
+            <p className={`text-xs ${
+              ["text-green-500", "text-yellow-500", "text-orange-500", "text-red-500"][
+              Math.min(Math.floor(airQuality / 25), 3)
+              ]
+            }`}>
+              {textsInfos["Air Quality"][Math.min(Math.floor(airQuality / 25), 3)]}
+            </p>
           </div>
 
           <div className="flex w-full justify-between bg-gray-2 px-5 py-3 items-center rounded">
             <div className="flex flex-col gap-1 w-full">
-              <input type="range" min="0" max="100" defaultValue="70" className="accent-darkblue" />
+              <input
+                type="range"
+                min="0"
+                max="100"
+                value={airQuality}
+                className="accent-darkblue"
+                onChange={(e) => setAirQuality(Number(e.target.value))}
+              />
             </div>
           </div>
         </div>
 
         <div className="flex flex-col gap-1">
-          <div className="flex w-full justify-between items-baseline">
+          <div className="flex w-full gap-3 items-baseline">
             <h2 className="text-base font-bold text-darkblue">
               Temperature
             </h2>
+
+            <p className={`text-xs ${
+              ["text-green-500", "text-yellow-500", "text-orange-500", "text-red-500"][
+              Math.min(Math.floor(temperature / 25), 3)
+              ]
+            }`}>
+              {textsInfos["Temperature"][Math.min(Math.floor(temperature / 25), 3)]}
+            </p>
           </div>
 
           <div className="flex w-full justify-between bg-gray-2 px-5 py-3 items-center rounded">
             <div className="flex flex-col gap-1 w-full">
-              <input type="range" min="0" max="100" defaultValue="90" className="accent-darkblue" />
+              <input
+                type="range"
+                min="0"
+                max="100"
+                value={temperature}
+                className="accent-darkblue"
+                onChange={(e) => setTemperature(Number(e.target.value))}
+              />
             </div>
           </div>
         </div>
 
         <div className="flex flex-col gap-1">
-          <div className="flex w-full justify-between items-baseline">
+          <div className="flex w-full gap-3 items-baseline">
             <h2 className="text-base font-bold text-darkblue">
               UV
             </h2>
+
+            <p className={`text-xs ${
+              ["text-green-500", "text-yellow-500", "text-orange-500", "text-red-500"][
+              Math.min(Math.floor(uv / 25), 3)
+              ]
+            }`}>
+              {textsInfos["UV"][Math.min(Math.floor(uv / 25), 3)]}
+            </p>
           </div>
 
           <div className="flex w-full justify-between bg-gray-2 px-5 py-3 items-center rounded">
             <div className="flex flex-col gap-1 w-full">
-              <input type="range" min="0" max="100" defaultValue="20" className="accent-darkblue" />
+              <input
+                type="range"
+                min="0"
+                max="100"
+                value={uv}
+                className="accent-darkblue"
+                onChange={(e) => setUv(Number(e.target.value))}
+              />
             </div>
           </div>
         </div>
 
         <div className="flex flex-col gap-1">
-          <div className="flex w-full justify-between items-baseline">
+          <div className="flex w-full gap-3 items-baseline">
             <h2 className="text-base font-bold text-darkblue">
               Pollen
             </h2>
+
+            <p className={`text-xs ${
+              ["text-green-500", "text-yellow-500", "text-orange-500", "text-red-500"][
+              Math.min(Math.floor(pollen / 25), 3)
+              ]
+            }`}>
+              {textsInfos["Pollen"][Math.min(Math.floor(pollen / 25), 3)]}
+            </p>
           </div>
 
           <div className="flex w-full justify-between bg-gray-2 px-5 py-3 items-center rounded">
             <div className="flex flex-col gap-1 w-full">
-              <input type="range" min="0" max="100" defaultValue="0" className="accent-darkblue" />
+              <input
+                type="range"
+                min="0"
+                max="100"
+                value={pollen}
+                className="accent-darkblue"
+                onChange={(e) => setPollen(Number(e.target.value))}
+              />
             </div>
           </div>
         </div>

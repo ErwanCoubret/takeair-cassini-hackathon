@@ -26,20 +26,18 @@ export default function User() {
 
   return (
     <div className="relative h-[calc(var(--vh)*100)] bg-gray-1 p-6 overflow-y-auto">
+      <div className="flex flex-col h-full gap-4">
+        <div className="flex w-full items-center justify-between">
+          <h1 className="text-2xl font-bold text-darkblue">About us</h1>
+        </div>
 
-      <Image
+        <Image
         src="/logo.png"
         width={150}
         height={100}
         alt="Logo"
         className="mx-auto my-5"
       />
-
-
-      <div className="flex flex-col h-full gap-4">
-        <div className="flex w-full items-center justify-between">
-          <h1 className="text-2xl font-bold text-darkblue">About us</h1>
-        </div>
 
         <div className="flex flex-col gap-1">
           <div className="flex w-full justify-between items-baseline">
