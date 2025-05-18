@@ -21,7 +21,7 @@ const baseUrl = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
 const overlays: Record<"map1" | "map2" | "map3" | "map4", string | null> = {
   map1: "/heatmaps/clouds.png",
   map2: "/heatmaps/pollen.png",
-  map3: "/map3.png",
+  map3: "/heatmaps/ndvi.png",
   map4: "/map4.png",
 };
 
@@ -82,8 +82,20 @@ export default function Map() {
     setSearchQuery(query);
   };
 
+  useEffect(() => {
+    const setVh = () => {
+      document.documentElement.style.setProperty(
+        "--vh",
+        `${window.innerHeight * 0.01}px`
+      );
+    };
+    setVh();
+    window.addEventListener("resize", setVh);
+    return () => window.removeEventListener("resize", setVh);
+  }, []);
+
   return (
-    <div className="relative h-screen bg-gray-1 p-6 overflow-hidden">
+    <div className="relative  h-[calc(var(--vh)*100)] bg-gray-1 p-6 overflow-hidden">
       <div className="absolute inset-0 z-0">
         <MapContainer
           center={[48.523071, 7.736971]}
@@ -98,7 +110,7 @@ export default function Map() {
             <ImageOverlay
               url={overlays[mapFilter]!}
               bounds={imageBounds}
-              opacity={0.4}
+              opacity={0.6}
             />
           )}
 
