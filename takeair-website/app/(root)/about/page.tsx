@@ -1,7 +1,9 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect } from "react";
+import { FaGithub } from "react-icons/fa6";
 
 export default function User() {
 
@@ -32,12 +34,12 @@ export default function User() {
         </div>
 
         <Image
-        src="/logo.png"
-        width={150}
-        height={100}
-        alt="Logo"
-        className="mx-auto my-5"
-      />
+          src="/logo.png"
+          width={150}
+          height={100}
+          alt="Logo"
+          className="mx-auto my-5"
+        />
 
         <div className="flex flex-col gap-1">
           <div className="flex w-full justify-between items-baseline">
@@ -47,6 +49,14 @@ export default function User() {
             We are dedicated to providing you with the <b>best quality information</b> on satellites and air data. We aim to be supported by <b>medical professionals and researchers</b>.
           </p>
         </div>
+
+        <Link
+          href={"https://github.com/ErwanCoubret/takeair-cassini-hackathon"}
+          className="flex items-center gap-2 w-fit bg-gray-2 text-darkblue p-2 rounded mt-5"
+        >
+          <FaGithub />
+          Code of the project
+        </Link>
 
         <div className="flex flex-col gap-1">
           <div className="flex w-full justify-between items-baseline">
