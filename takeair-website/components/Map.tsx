@@ -20,17 +20,17 @@ import { IoIosWater, IoMdCloudOutline } from "react-icons/io";
 const baseUrl = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
 
 const overlays: Record<"map1" | "map2" | "map3" | "map4" | "map5" | "map6", string | null> = {
-  map1: "/heatmaps/clouds.png",
+  map1: "/heatmaps/foryou.png",
   map2: "/heatmaps/temperature.png",
   map3: "/heatmaps/airquality.png",
-  map4: "/heatmaps/ndvi.png",
+  map4: "/heatmaps/uv.png",
   map5: "/heatmaps/clouds.png",
   map6: "/heatmaps/ndvi.png",
 };
 
 const imageBounds: [[number, number], [number, number]] = [
-  [47.9246029, 6.8386557],
-  [49.1145504, 8.6352863],
+  [45.46055743458582, 3.245394579402393],
+  [51.41100662886027, 12.228547420597607],
 ];
 
 function SearchLayer({
@@ -104,7 +104,7 @@ export default function Map() {
       <div className="absolute inset-0 z-0">
         <MapContainer
           center={[48.523071, 7.736971]}
-          zoom={10}
+          zoom={8}
           className={`h-full w-full ${isFilterWindowOpen ? "pointer-events-none" : ""
             }`}
           attributionControl={false}
@@ -115,7 +115,7 @@ export default function Map() {
             <ImageOverlay
               url={overlays[mapFilter]!}
               bounds={imageBounds}
-              opacity={0.6}
+              opacity={0.4}
             />
           )}
 
@@ -151,7 +151,16 @@ export default function Map() {
           </button>
         </div>
 
-        <p className="text-sm bg-gray-1 px-1 rounded text-gray-3">
+        <div className="flex items-center gap-2 mt-2 p-2 bg-gray-1 rounded">
+          <span className="text-xs text-darkblue">Low</span>
+          <div
+            className="w-32 h-4 rounded-full"
+            style={{ background: "linear-gradient(to right, green, red)" }}
+          ></div>
+          <span className="text-xs text-darkblue">High</span>
+        </div>
+
+        <p className="text-sm bg-gray-1 px-1 rounded text-darkblue">
           Data gathered from Copernicus
         </p>
       </form>

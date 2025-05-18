@@ -210,7 +210,7 @@ export default function Home() {
               </button>
             </div>
 
-            <div className="space-y-4 text-xs text-gray-3 mt-4 max-h-[75vh] overflow-y-auto">
+            <div className="space-y-4 text-sm text-gray-3 mt-4 max-h-[75vh] overflow-y-auto">
               <p>
                 This app (“App”) provides only information for educational purposes. This App is not medical or treatment advice, professional diagnosis, opinion, or services – and may not be treated as such by the user. As such, this App may not be relied upon for the purposes of medical diagnosis or as a recommendation for medical care or treatment. The information provided by this App is not a substitute for professional medical advice, diagnosis or treatment. All content, including text, graphics, images and information, contained on or available through this App is for general information purposes only.
               </p>
