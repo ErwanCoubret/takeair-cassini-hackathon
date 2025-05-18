@@ -494,6 +494,46 @@ function evaluatePixel(samples) {
 }
 '''
 
+UV= '''
+//VERSION=3
+function setup() {
+  return {
+    input: ["O3", "AER_AI_340_380", "CLOUD_FRACTION", "dataMask"],
+    output: [
+      { id: "default", bands: 4 },
+      { id: "uvrisk", bands: 1, sampleType: "FLOAT32" },
+      { id: "dataMask", bands: 1 }
+    ]
+  };
+}
+
+function evaluatePixel(samples) {
+  let o3 = samples.O3;
+  let ai = samples.AER_AI_340_380;
+  let cloud = samples.CLOUD_FRACTION;
+
+  // Normalize input variables (based on typical observed ranges)
+  let normO3 = Math.min(Math.max(o3 / 0.35, 0.1), 2.0); // O3 usually 0.1–0.35
+  let normAI = Math.min(Math.max(ai / 5.0, 0.0), 1.0);   // AI range: -1 to 5
+  let normCloud = Math.min(Math.max(cloud, 0.0), 1.0);
+
+  // Estimate UV exposure risk proxy
+  let uv_risk = (1.0 - normCloud) * (1.0 - normAI) * (1.0 / normO3);
+
+  // Normalize for RGB visualization
+  let norm = Math.min(Math.max((uv_risk - 1) / 2, 0.0), 1.0);
+  let r = norm;
+  let g = 1.0 - norm;
+  let b = 0.0;
+
+  return {
+    default: [r, g, b, samples.dataMask],
+    uvrisk: [uv_risk],
+    dataMask: [samples.dataMask]
+  };
+}
+'''
+
 masks = {
     'AER_AI': AER_AI,
     'METHANE': METHANE,
@@ -504,5 +544,6 @@ masks = {
     'CO': CARBON_MONOXIDE,
     'HCHO': HCHO,
     'NO2': NO2,
-    'SO2': SO2
+    'SO2': SO2,
+    'UV': UV
 }
