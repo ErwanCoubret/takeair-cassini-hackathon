@@ -74,11 +74,11 @@ export default function User() {
           alt="Us"
         />
 
-        <div className="w-full flex flex-col gap-1 ">
+        <div className=" flex flex-col gap-2">
 
           <ul>
             {teamMembers.map((member) => (
-              <li key={member.name} className="flex flex-col justify-between items-center py-1">
+              <li key={member.name} className="flex flex-col py-1">
                 <span className="font-bold text-darkblue">{member.name}</span> <span>{member.role}</span>
               </li>
             ))}
