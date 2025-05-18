@@ -1,9 +1,11 @@
 "use client";
 
 import Link from "next/link";
+import { useState } from "react";
 import { FaArrowRight } from "react-icons/fa6";
 
 export default function Ressources() {
+  const [isMore, setIsMore] = useState(false);
 
   return (
     <div className="relative h-screen bg-gray-1 p-6 overflow-y-auto">
@@ -12,7 +14,7 @@ export default function Ressources() {
           <h1 className="text-xl font-bold text-darkblue">Ressources</h1>
         </div>
 
-        <div className="flex flex-col gap-3 w-full justify-between items-center rounded">
+        <div className="flex flex-col gap-5 w-full justify-between items-center rounded">
           <div className="flex flex-col w-full">
             <div className="flex items-center justify-between gap-2 bg-gray-2 p-2 px-4 rounded-t">
               <p className="text-darkblue">
@@ -97,7 +99,55 @@ export default function Ressources() {
             </div>
           </div>
 
-          <button className="text-sm w-fit flex items-center gap-2 bg-gray-2 text-darkblue p-2 rounded mb-20">
+          {isMore && (
+            <>
+              <div className="flex flex-col w-full">
+                <div className="flex items-center justify-between gap-2 bg-gray-2 p-2 px-4 rounded-t">
+                  <p className="text-darkblue">
+                    Air Quality: Sources of Pollution and Health Effects
+                    <i className="ml-2 text-gray-3 text-sm font-normal">25/02/02</i>
+                  </p>
+
+                  <Link
+                    href={"https://sante.gouv.fr/sante-et-environnement/air-exterieur/qualite-de-l-air-exterieur-10984/article/qualite-de-l-air-sources-de-pollution-et-effets-sur-la-sante"}
+                    className="flex items-center bg-gray-1 text-gray-3 p-1 rounded">
+                    <FaArrowRight />
+                  </Link>
+                </div>
+
+                <div className="flex items-center justify-between gap-2 bg-white p-2 px-4 rounded-b">
+                  <p className="text-sm text-gray-3">
+                    Every day, an adult inhales 10,000 to 20,000 liters of air, which is composed of an average of 99% oxygen and nitrogen. However, this air can also contain various pollutants that can cause health effects.
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex flex-col w-full mb-20">
+                <div className="flex items-center justify-between gap-2 bg-gray-2 p-2 px-4 rounded-t">
+                  <p className="text-darkblue">
+                    UV Radiation: Sources, Exposure, and Health Risks
+                    <i className="ml-2 text-gray-3 text-sm font-normal">08/04/2025</i>
+                  </p>
+
+                  <Link
+                    href={"https://sante.gouv.fr/sante-et-environnement/air-exterieur/qualite-de-l-air-exterieur-10984/article/qualite-de-l-air-sources-de-pollution-et-effets-sur-la-sante"}
+                    className="flex items-center bg-gray-1 text-gray-3 p-1 rounded">
+                    <FaArrowRight />
+                  </Link>
+                </div>
+
+                <div className="flex items-center justify-between gap-2 bg-white p-2 px-4 rounded-b">
+                  <p className="text-sm text-gray-3">
+                    Ultraviolet (UV) radiation, a component of sunlight, is invisible but powerful. Prolonged exposure can lead to skin damage, eye disorders, and increased risk of skin cancer. Understanding UV levels helps protect against overexposure.
+                  </p>
+                </div>
+              </div>
+            </>
+          )}
+
+          {!isMore && <button
+            onClick={() => setIsMore(true)}
+            className="text-sm w-fit flex items-center gap-2 bg-gray-2 text-darkblue p-2 rounded mb-20">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -113,7 +163,7 @@ export default function Ressources() {
               />
             </svg>
             See more
-          </button>
+          </button>}
         </div>
 
 

@@ -124,7 +124,7 @@ export default function Map() {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search"
-            className="p-2 rounded-md w-40 shadow-md bg-gray-1 focus:border-darkblue focus:outline-none"
+            className="p-2 text-gray-3 rounded-md w-40 shadow-md bg-gray-1 focus:border-darkblue focus:outline-none"
           />
           <button
             type="submit"
