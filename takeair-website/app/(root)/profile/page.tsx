@@ -34,7 +34,7 @@ export default function User() {
             </h2>
           </div>
           <p className="text-sm text-gray-3 text-darkblue">
-            Indicate your sensitivities to the following elements in order to get personnal recommandations.
+            Indicate your sensitivities to the following elements in order to get personnal recommendations.
           </p>
         </div>
 

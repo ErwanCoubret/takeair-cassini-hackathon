@@ -3,12 +3,13 @@
 import { IoBook, IoBookOutline, IoHome, IoHomeOutline, IoMap, IoMapOutline, IoPersonCircle, IoPersonCircleOutline } from "react-icons/io5";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { MdInfo, MdOutlineInfo } from "react-icons/md";
 
 export default function Navbar() {
   const pathname = usePathname();
 
   return (
-    <nav className="absolute bottom-0 z-4000 bg-gray-2 h-15 text-white w-full">
+    <nav className="absolute max-w-[600px] bottom-0 z-4000 bg-gray-2 h-15 text-white w-full">
       <div className="flex items-center w-full h-full">
         <Link
           href="./"
@@ -64,6 +65,20 @@ export default function Navbar() {
             <IoPersonCircleOutline className="text-2xl" />
           )}
           <span className={`text-xs ${pathname === "/profile" ? "font-bold" : ""}`}>Profile</span>
+        </Link>
+
+        <Link
+          href="./about"
+          className={`flex flex-col justify-center items-center w-full h-full ${
+            pathname === "/about" ? "bg-green-2 text-gray-2 rounded-tl" : "text-darkblue"
+          }`}
+        >
+          {pathname === "/about" ? (
+            <MdInfo className="text-2xl" />
+          ) : (
+            <MdOutlineInfo className="text-2xl" />
+          )}
+          <span className={`text-xs ${pathname === "/about" ? "font-bold" : ""}`}>About</span>
         </Link>
       </div>
     </nav>

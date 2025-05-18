@@ -1,6 +1,7 @@
 "use client";
 
 import Modal from "@/components/Modal";
+import Image from "next/image";
 import Link from "next/link";
 import { useState, useRef, useEffect } from "react";
 import { BsBank, BsThermometerHalf } from "react-icons/bs";
@@ -39,7 +40,14 @@ export default function Home() {
     <div className="relative h-[calc(var(--vh)*100)] bg-gray-1 p-6 overflow-y-auto">
       <div className="flex flex-col h-full gap-5">
         <div className="flex w-full items-center justify-between">
-          <h1 className="text-xl font-bold text-darkblue">Home</h1>
+
+          <Image
+            src="/logo.png"
+            alt="Logo"
+            width={120}
+            height={120}
+            className=""
+          />
 
           <button
             className={`flex items-center gap-2 ${isAudioPlaying ? "bg-darkblue text-gray-1" : "bg-gray-2 text-darkblue"
@@ -174,13 +182,20 @@ export default function Home() {
         <div className="flex flex-col gap-2">
           <div className="flex w-full justify-between items-baseline">
             <h2 className="text-lg font-bold text-darkblue">
-              Personnal Health Recommandation
+              Personnal Health Recommendation
             </h2>
           </div>
 
+          <Link href="/about">
+            <button className="flex text-sm justify-between items-center gap-2 bg-gray-2 px-4 py-2 rounded text-darkblue font-semibold">
+              See Disclaimer
+              <FaArrowRight className="text-base" />
+            </button>
+          </Link>
+
           <div className="flex flex-col gap-3 w-full justify-between bg-gray-2 p-3 items-center rounded">
             <div className="flex flex-col w-full">
-              <div className="flex text-darkblue items-center justify-between gap-2 bg-red-300 p-2 px-4 rounded-t">
+              <div className="flex text-darkblue items-center justify-between gap-2 bg-red-400 p-2 px-4 rounded-t">
                 Pollen Alert
 
                 <button
@@ -193,7 +208,7 @@ export default function Home() {
 
               <div className="flex items-center justify-between gap-2 bg-gray-1 p-2 px-4 rounded-b">
                 <p className="text-sm text-gray-3">
-                  High pollen density detected in your area. It is recommended to take your medicine.
+                  High pollen density detected in your area. It is recommended to take your medicine prescribed by your doctor.
                 </p>
               </div>
             </div>
@@ -243,7 +258,7 @@ export default function Home() {
               <IoCloseSharp className="text-darkblue text-2xl" />
             </button>
           </div>
-          <div className="mt-4 text-gray-3 text-sm space-y-2">
+          <div className="mt-4 text-gray-3 space-y-2">
             <p>Pollen levels are currently very high in Strasbourg.</p>
             <ul className="list-disc ml-5">
               <li>Consider keeping windows closed during peak hours.</li>
@@ -260,7 +275,7 @@ export default function Home() {
               <IoCloseSharp className="text-darkblue text-2xl" />
             </button>
           </div>
-          <div className="mt-4 text-gray-3 text-sm space-y-2">
+          <div className="mt-4 text-gray-3 space-y-2">
             <p>Wide temperature fluctuations can affect cardiovascular health.</p>
             <ul className="list-disc ml-5">
               <li>Stay hydrated and avoid strenuous activity during midday heat.</li>
@@ -277,7 +292,7 @@ export default function Home() {
               <IoCloseSharp className="text-darkblue text-2xl" />
             </button>
           </div>
-          <div className="mt-4 text-gray-3 text-sm space-y-2">
+          <div className="mt-4 text-gray-3 space-y-2">
             <p>UV index of 6 indicates high exposure risk.</p>
             <ul className="list-disc ml-5">
               <li>Apply broad-spectrum sunscreen (SPF 30+).</li>
@@ -307,7 +322,7 @@ export default function Home() {
 
             <Link href="/ressources" className="flex items-center justify-between bg-gray-2 p-2 px-4 rounded w-full mb-30">
               <BsBank className="text-2xl text-darkblue" />
-              <p className="text-base font-bold text-darkblue">Gouvernement Recommandation</p>
+              <p className="text-base font-bold text-darkblue">Gouvernement Recommendation</p>
             </Link>
           </div>
 

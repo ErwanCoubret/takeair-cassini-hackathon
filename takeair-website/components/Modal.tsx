@@ -52,7 +52,7 @@ export default function Modal({ children, showState, setShowState }: ModalProps)
         >
             <div
                 ref={modalRef}
-                className="relative bg-gray-1 xl:w-4/5 2xl:w-3/5 w-full lg:max-w-[90vw] lg:rounded-md p-2 xl:p-10 h-full lg:h-fit lg:max-h-[80vh]"
+                className="relative bg-gray-1 xl:w-4/5 2xl:w-3/5 w-full lg:-[90vw] lg:rounded-md p-2 xl:p-10 h-full lg:h-fit lg:max-h-[80vh]"
             >
                 <div className="w-full z-20 p-3 custom-scroll overflow-y-auto">{children}</div>
             </div>
