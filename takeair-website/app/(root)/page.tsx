@@ -13,13 +13,16 @@ import { MdOutlineWbSunny } from "react-icons/md";
 export default function Home() {
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
   const [isMetricsModalOpen, setIsMetricsModalOpen] = useState(false);
+  const [isPollenModalOpen, setIsPollenModalOpen] = useState(false);
+  const [isTempModalOpen, setIsTempModalOpen] = useState(false);
+  const [isUVModalOpen, setIsUVModalOpen] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
     audioRef.current = new Audio("/recap.mp3");
   }, []);
 
-   // Hack pour homogénéiser 100vh sur mobile/desktop
+  // Hack pour homogénéiser 100vh sur mobile/desktop
   useEffect(() => {
     const setVh = () => {
       document.documentElement.style.setProperty(
@@ -180,9 +183,12 @@ export default function Home() {
               <div className="flex text-darkblue items-center justify-between gap-2 bg-red-300 p-2 px-4 rounded-t">
                 Pollen Alert
 
-                <div className="flex items-center bg-gray-1 text-gray-3 p-1 rounded">
+                <button
+                  onClick={() => setIsPollenModalOpen(true)}
+
+                  className="flex items-center bg-gray-1 text-gray-3 p-1 rounded">
                   <FaArrowRight />
-                </div>
+                </button>
               </div>
 
               <div className="flex items-center justify-between gap-2 bg-gray-1 p-2 px-4 rounded-b">
@@ -196,9 +202,11 @@ export default function Home() {
               <div className="flex text-darkblue items-center justify-between gap-2 bg-orange-300 p-2 px-4 rounded-t">
                 Large temperature ranges
 
-                <div className="flex items-center bg-gray-1 text-gray-3 p-1 rounded">
+                <button
+                  onClick={() => setIsTempModalOpen(true)}
+                  className="flex items-center bg-gray-1 text-gray-3 p-1 rounded">
                   <FaArrowRight />
-                </div>
+                </button>
               </div>
 
               <div className="flex items-center justify-between gap-2 bg-gray-1 p-2 px-4 rounded-b">
@@ -212,9 +220,11 @@ export default function Home() {
               <div className="flex text-darkblue items-center justify-between gap-2 bg-yellow-300 p-2 px-4 rounded-t">
                 High UV index
 
-                <div className="flex items-center bg-gray-1 text-gray-3 p-1 rounded">
+                <button
+                  onClick={() => setIsUVModalOpen(true)}
+                  className="flex items-center bg-gray-1 text-gray-3 p-1 rounded">
                   <FaArrowRight />
-                </div>
+                </button>
               </div>
 
               <div className="flex items-center justify-between gap-2 bg-gray-1 p-2 px-4 rounded-b">
@@ -225,6 +235,57 @@ export default function Home() {
             </div>
           </div>
         </div>
+
+        <Modal showState={isPollenModalOpen} setShowState={setIsPollenModalOpen}>
+          <div className="flex justify-between items-center">
+            <h2 className="text-lg font-bold text-darkblue">Pollen Alert Details</h2>
+            <button className="p-2 rounded bg-gray-2" onClick={() => setIsPollenModalOpen(false)}>
+              <IoCloseSharp className="text-darkblue text-2xl" />
+            </button>
+          </div>
+          <div className="mt-4 text-gray-3 text-sm space-y-2">
+            <p>Pollen levels are currently very high in Strasbourg.</p>
+            <ul className="list-disc ml-5">
+              <li>Consider keeping windows closed during peak hours.</li>
+              <li>Wear a mask when outdoors, especially in the morning.</li>
+              <li>Consult your physician if symptoms worsen.</li>
+            </ul>
+          </div>
+        </Modal>
+
+        <Modal showState={isTempModalOpen} setShowState={setIsTempModalOpen}>
+          <div className="flex justify-between items-center">
+            <h2 className="text-lg font-bold text-darkblue">Temperature Advice</h2>
+            <button className="p-2 rounded bg-gray-2" onClick={() => setIsTempModalOpen(false)}>
+              <IoCloseSharp className="text-darkblue text-2xl" />
+            </button>
+          </div>
+          <div className="mt-4 text-gray-3 text-sm space-y-2">
+            <p>Wide temperature fluctuations can affect cardiovascular health.</p>
+            <ul className="list-disc ml-5">
+              <li>Stay hydrated and avoid strenuous activity during midday heat.</li>
+              <li>Dress in layers to adapt to cooling evenings.</li>
+              <li>Monitor weather updates and plan accordingly.</li>
+            </ul>
+          </div>
+        </Modal>
+
+        <Modal showState={isUVModalOpen} setShowState={setIsUVModalOpen}>
+          <div className="flex justify-between items-center">
+            <h2 className="text-lg font-bold text-darkblue">UV Protection Tips</h2>
+            <button className="p-2 rounded bg-gray-2" onClick={() => setIsUVModalOpen(false)}>
+              <IoCloseSharp className="text-darkblue text-2xl" />
+            </button>
+          </div>
+          <div className="mt-4 text-gray-3 text-sm space-y-2">
+            <p>UV index of 6 indicates high exposure risk.</p>
+            <ul className="list-disc ml-5">
+              <li>Apply broad-spectrum sunscreen (SPF 30+).</li>
+              <li>Wear protective clothing and sunglasses.</li>
+              <li>Seek shade between 11 a.m. and 3 p.m.</li>
+            </ul>
+          </div>
+        </Modal>
 
         <div className="flex flex-col gap-2">
           <div className="flex w-full justify-between items-baseline">
